@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="./assets/css/style.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Dashboard</title>
+</head>
+
+<body>
+<!-- top navbar start -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <!-- offcanvas-trigger start -->
+        <button class="navbar-toggler me-2" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- offcanvas-trigger end -->
+        <a class="navbar-brand fw-bold text-uppercase me-auto" href="/dashboard">SEU Library</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form class="d-flex ms-auto" role="search">
+                <div class="input-group my-3 my-lg-0">
+                    <input type="text" class="form-control" placeholder="Search..."
+                           aria-label="Recipient's username" aria-describedby="button-addon2"/>
+                    <button class="btn btn-outline-secondary btn-primary text-white" type="button"
+                            id="button-addon2">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </form>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        <img class="user-icon" src="./assets/images/profile-pic.jpg" alt="admin picture"/>
+                        Admin
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#">View Profile</a></li>
+                        <li><a class="dropdown-item" href="#">About</a></li>
+                        <li>
+                            <hr class="dropdown-divider"/>
+                        </li>
+                        <li><a class="dropdown-item" href="/logout">logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- top navbar end -->
+
+<!-- offcanvas start -->
+<div class="offcanvas offcanvas-start bg-dark text-white sidebar-nav" tabindex="-1" id="offcanvasExample"
+     aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-body">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <div class="text-secondary small text-uppercase fw-bold">Core</div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/dashboard"><i
+                        class="fa-solid fa-gauge-high"></i>Dashboard</a>
+            </li>
+            <li class="nav-item my-0">
+                <hr/>
+            </li>
+            <li class="nav-item">
+                <div class="text-secondary small text-uppercase fw-bold">
+                    Inventory
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active sidebar-link" data-bs-toggle="collapse" href="#booksMgt" role="button"
+                   aria-expanded="false" aria-controls="booksMgt">
+                    <i class="fa-solid fa-book-open me-2"></i>Books Management
+                    <span class="right-icon float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                </a>
+                <div class="collapse" id="booksMgt">
+                    <div>
+                        <ul class="navbar-nav ps-3">
+                            <li>
+                                <a class="nav-link active" href="/book"><i
+                                        class="fa-solid fa-plus me-2"></i>Add New</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active sidebar-link" data-bs-toggle="collapse" href="#studentsMgt" role="button"
+                   aria-expanded="false" aria-controls="studentsMgt">
+                    <i class="fa-solid fa-users me-2"></i>Students
+                    <span class="right-icon float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                </a>
+                <div class="collapse" id="studentsMgt">
+                    <div>
+                        <ul class="navbar-nav ps-3">
+                            <li>
+                                <a class="nav-link active" href="/student"><i
+                                        class="fa-solid fa-plus me-2"></i>Add New</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item my-0">
+                <hr/>
+            </li>
+            <li class="nav-item">
+                <div class="text-secondary small text-uppercase fw-bold">
+                    Business
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active sidebar-link" data-bs-toggle="collapse" href="#loanMgt" role="button"
+                   aria-expanded="false" aria-controls="loanMgt">
+                    <i class="fa-solid fa-book me-2"></i>Books loan
+                    <span class="right-icon float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                </a>
+                <div class="collapse" id="loanMgt">
+                    <div>
+                        <ul class="navbar-nav ps-3">
+                            <li>
+                                <a class="nav-link active" href="/book"><i class="fa-solid fa-plus me-2"></i>Add New</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active sidebar-link" data-bs-toggle="collapse" href="#subscriotionMgt"
+                   role="button" aria-expanded="false" aria-controls="subscriotionMgt">
+                    <i class="fa-solid fa-bangladeshi-taka-sign me-2"></i>Vendor & Publisher
+                    <span class="right-icon float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                </a>
+                <div class="collapse" id="subscriotionMgt">
+                    <div>
+                        <ul class="navbar-nav ps-3">
+                            <li>
+                                <a class="nav-link active" href="#"><i class="fa-solid fa-plus me-2"></i>Add New Vendor</a>
+                            </li>
+                            <li>
+                                <a class="nav-link active" href="#"><i class="fa-solid fa-plus me-2"></i>Add New
+                                    Publisher</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item my-0">
+                <hr/>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/logout"><i
+                        class="fa-solid fa-arrow-right-from-bracket me-2"></i>Logout</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- offcanvas end -->
+
+<!-- main content start -->
+<main class="mt-1 pt-3 ps-4 me-4">
+    <div class="card">
+        <div class="card-body">
+            <i class="fa-solid fa-house"></i> / Student Management
+            <div>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#addNewStudent"
+                        class="btn btn-primary position-absolute top-50 end-0 translate-middle-y me-2">
+                    <i class="fa-solid fa-plus"></i>Add Students
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">Students List</div>
+            <div class="card-body">
+                <table class="table">
+                    <thead class="table-dark">
+                    <tr style="text-align: center;">
+                        <th scope="col">#sNo</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Phone Number</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="student : ${students}" style="text-align: center;">
+                        <th th:text="${student.id}" scope="row"></th>
+                        <td th:text="${student.name}"></td>
+                        <td th:text="${student.email}"></td>
+                        <td th:text="${student.address}"></td>
+                        <td th:text="${student.phoneNo}"></td>
+                        <td th:text="${student.regDate}"></td>
+                        <td th:text="${student.status}"></td>
+                        <td>
+                            <button type="button" class="btn btn-primary editBtn" data-bs-toggle="modal"
+                                    data-bs-target="#editStudentModal"
+                                    th:data-id="${student.id}"
+                                    th:data-name="${student.name}"
+                                    th:data-email="${student.email}"
+                                    th:data-address="${student.address}"
+                                    th:data-number="${student.phoneNo}"
+                                    th:data-date="${student.regDate}"
+                                    th:data-status="${student.status}"
+                            >
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                            <a th:href="@{/student/delete/{id}(id=${student.id})}"
+                               onclick="return confirm('Are you sure you want to delete this student?')"
+                               type="button" class="btn btn-danger">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- main content end -->
+
+
+<!-- Add Modal -->
+<div class="modal fade" id="addNewStudent" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="addNewStudentLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="addNewStudentLabel">
+                    Add Student
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/student/save}" th:object="${student}" th:method="POST">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="studentName" class="form-label">Student Name</label>
+                                <input th:field="*{name}" type="text" class="form-control" id="studentName"
+                                       name="studentName" required/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="studentEmail" class="form-label">Email</label>
+                                <input th:field="*{email}" type="text" class="form-control" id="studentEmail"
+                                       name="studentEmail" required/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="number" class="form-label">Phone Number</label>
+                                <input th:field="*{phoneNo}" type="tel" class="form-control" id="number" name="number"
+                                       required/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="status" class="form-label">Status</label>
+                                <select th:field="*{status}" id="status" class="form-control" name="status">
+                                    <option th:value="Active">Active</option>
+                                    <option th:value="Inactive">Inactive</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <textarea th:field="*{address}" class="form-control" id="address"
+                                      name="address" required></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Edit Modal -->
+<div class="modal fade" id="editStudentModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="editStudentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="editStudentModalLabel">
+                    Edit Student
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/student/update}" th:object="${student}" th:method="POST">
+                    <input type="hidden" id="editId" name="id"/>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="editStudentName" class="form-label">Student Name</label>
+                                <input th:field="*{name}" type="text" class="form-control" id="editStudentName"
+                                       name="studentName"
+                                       required/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="editStudentEmail" class="form-label">Student Email</label>
+                                <input th:field="*{email}" type="email" class="form-control" id="editStudentEmail"
+                                       name="studentEmail"
+                                       required/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="editNumber" class="form-label">Phone Number</label>
+                                <input th:field="*{phoneNo}" type="text" id="editNumber" class="form-control"
+                                       name="number" required/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="editStatus" class="form-label">Status</label>
+                                <!--                                <input th:field="*{status}" type="text" id="editStatus" class="form-control" name="status" required/>-->
+                                <select th:field="*{status}" id="editStatus" class="form-control" name="status">
+                                    <option th:value="Active">Active</option>
+                                    <option th:value="Inactive">Inactive</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="editAddress" class="form-label">Address</label>
+                            <textarea th:field="*{address}" id="editAddress" class="form-control" name="address"
+                                      required></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        // When edit button is clicked
+        $('.editBtn').on('click', function () {
+            // Get data from button attributes
+            var id = $(this).data('id');
+            var studentName = $(this).data('name');
+            var email = $(this).data('email');
+            var address = $(this).data('address');
+            var number = $(this).data('number');
+            var status = $(this).data('status');
+
+            console.log('Loading data:', {id, studentName, email, address, number, status});
+
+            // Populate the edit modal form fields
+            $('#editId').val(id);
+            $('#editStudentName').val(studentName);
+            $('#editStudentEmail').val(email);
+            $('#editAddress').val(address);
+            $('#editNumber').val(number);
+            $('#editStatus').val(status);
+        });
+
+        // Clear form when modal is hidden
+        $('#editStudentModal').on('hidden.bs.modal', function () {
+            $('#editId').val('');
+            $('#editStudentEmail').val('');
+            $('#editAddress').val('');
+            $('#editNumber').val('');
+            $('#editStatus').val('');
+        });
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/88394ab969.js" crossorigin="anonymous"></script>
+</body>
+</html>

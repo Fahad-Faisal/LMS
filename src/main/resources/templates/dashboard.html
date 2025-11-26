@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <title>Dashboard</title>
+</head>
+
+<body>
+    <!-- top navbar start -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark z-2">
+        <div class="container-fluid">
+            <!-- offcanvas-trigger start -->
+            <button class="navbar-toggler me-2" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+            <!-- offcanvas-trigger end -->
+            <a class="navbar-brand fw-bold text-uppercase me-auto" href="/dashboard">SEU Library</a>
+            <button class="navbar-toggler " type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <form class="d-flex ms-auto" role="search">
+                    <div class="input-group my-3 my-lg-0 ">
+                        <input type="text" class="form-control" placeholder="Search..."
+                            aria-label="Recipient’s username" aria-describedby="button-addon2">
+                        <button class="btn btn-outline-secondary btn-primary text-white" type="button"
+                            id="button-addon2"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+                </form>
+                <ul class="navbar-nav   mb-2 mb-lg-0">
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <img class="user-icon" src="./assets/images/profile-pic.jpg" alt="admin picture">
+                            Admin
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">View Profile</a></li>
+                            <li><a class="dropdown-item" href="#">About</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="/logout">logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- top navbar end -->
+
+    <!-- offcanvas start -->
+
+    <div class="offcanvas offcanvas-start bg-danger text-white sidebar-nav z-0" tabindex="-1" id="offcanvasExample"
+        aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-body">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <div class="text-secondary small text-uppercase fw-bold">
+                        Core
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/dashboard"><i
+                            class="fa-solid fa-gauge-high"></i>Dashboard</a>
+                </li>
+                <li class="nav-item my-0">
+                    <hr>
+                </li>
+                <li class="nav-item">
+                    <div class="text-secondary small text-uppercase fw-bold">
+                        Inventory
+                    </div>
+                </li>
+                <!-- books Management -->
+                <li class="nav-item">
+                    <a class="nav-link active sidebar-link" data-bs-toggle="collapse" href="#booksMgt" role="button"
+                        aria-expanded="false" aria-controls="booksMgt">
+                        <i class="fa-solid fa-book-open me-2"></i>Books Management
+                        <span class="right-icon float-end"><i class="fa-solid fa-chevron-down  "></i></span>
+                    </a>
+                    <div class="collapse" id="booksMgt">
+                        <div>
+                            <ul class="navbar-nav ps-3">
+                                <li>
+                                    <a class="nav-link active" href="/book"><i class="fa-solid fa-plus me-2"></i>Add New</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Students -->
+                <li class="nav-item">
+                    <a class="nav-link active sidebar-link" data-bs-toggle="collapse" href="#studentsMgt" role="button"
+                        aria-expanded="false" aria-controls="studentsMgt">
+                        <i class="fa-solid fa-users me-2"></i>Students
+                        <span class="right-icon float-end"><i class="fa-solid fa-chevron-down  "></i></span>
+                    </a>
+                    <div class="collapse" id="studentsMgt">
+                        <div>
+                            <ul class="navbar-nav ps-3">
+                                <li>
+                                    <a class="nav-link active" href="/student"><i class="fa-solid fa-plus me-2"></i>Add New</a>
+                                </li>
+                                <li></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item my-0">
+                    <hr>
+                </li>
+                <li class="nav-item">
+                    <div class="text-secondary small text-uppercase fw-bold">
+                        Business
+                    </div>
+                </li>
+                <!-- books loan -->
+                <li class="nav-item">
+                    <a class="nav-link active sidebar-link" data-bs-toggle="collapse" href="#loanMgt" role="button"
+                        aria-expanded="false" aria-controls="loanMgt">
+                        <i class="fa-solid fa-book me-2"></i>Books loan
+                        <span class="right-icon float-end"><i class="fa-solid fa-chevron-down  "></i></span>
+                    </a>
+                    <div class="collapse" id="loanMgt">
+                        <div>
+                            <ul class="navbar-nav ps-3">
+                                <li>
+                                    <a class="nav-link active" href="/lendBook"><i class="fa-solid fa-plus me-2"></i>Add New</a>
+                                </li>
+
+                                <li></li>
+                            </ul>
+                        </div>
+
+                <li class="nav-item">
+                    <a class="nav-link active sidebar-link" data-bs-toggle="collapse" href="#subscriotionMgt"
+                        role="button" aria-expanded="false" aria-controls="subscriotionMgt">
+                        <i class="fa-solid fa-bangladeshi-taka-sign me-2"></i>Vendor & Publisher
+                        <span class="right-icon float-end"><i class="fa-solid fa-chevron-down  "></i></span>
+                    </a>
+                    <div class="collapse" id="subscriotionMgt">
+                        <div>
+                            <ul class="navbar-nav ps-3">
+                                <li>
+                                    <a class="nav-link active" href="/vendor"><i class="fa-solid fa-plus me-2"></i>Add New Vendor</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link active" href="publication"><i class="fa-solid fa-plus me-2"></i>Add New Publisher</a>
+                                </li>
+                                <li></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item my-0">
+                    <hr>
+                </li>
+                <a class="nav-link active" href="/logout"><i class="fa-solid fa-arrow-right-from-bracket me-2"></i>Logout</a>
+
+            </ul>
+        </div>
+    </div>
+    <!-- offcanvas end -->
+    <!-- main content start -->
+    <main class="mt-1 pt-3">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="fw-bold text-uppercase">Dashboard</h4>
+                    <p>Statistics of the system!</p>
+                </div>
+                <div class="col-md-3">
+                    <div class="card" >
+                        <div class=" card-body text-center">
+                        <h5 class="card-title text-body-secondary">Total books</h5>
+                        <h2 th:text="${t_book}" class="card-subtitle mb-2 "></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-body-secondary">Total Students</h5>
+                        <h2 th:text="${t_student}" class="card-subtitle mb-2 "></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-body-secondary">Total Vendors</h5>
+                        <h2 th:text="${t_vendor}" class="card-subtitle mb-2 "></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-body-secondary">Total publications</h5>
+                        <h2 th:text="${t_publisher}" class="card-subtitle mb-2 "></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div><br></div>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="recent-books" data-bs-toggle="tab"
+                    data-bs-target="#recent-books-pane" type="button" role="tab" aria-controls="recent-books-pane"
+                    aria-selected="true">Recent Books</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="recent-students" data-bs-toggle="tab"
+                    data-bs-target="#recent-students-pane" type="button" role="tab" aria-controls="recent-students-pane"
+                    aria-selected="false">Recent Students</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="recent-loans" data-bs-toggle="tab" data-bs-target="#recent-loans-pane"
+                    type="button" role="tab" aria-controls="recent-loans-pane" aria-selected="false">Recent
+                    Loans</button>
+            </li>
+
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="recent-books-pane" role="tabpanel" aria-labelledby="recent-books"
+                tabindex="0">
+                <table class="table">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">#sNo</th>
+                            <th scope="col">Book Name</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Pub Name</th>
+                            <th scope="col">Author Name</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Quantity</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="student : ${all_student_list}">
+                            <th th:text="${student.id}" scope="row"></th>
+                            <td th:text="${student.name}"></td>
+                            <td th:text="${student.email}"></td>
+                            <td th:text="${student.address}"></td>
+                            <td th:text="${student.phoneNo}"></td>
+                            <td th:text="${student.regDate}"></td>
+                            <td th:text="${student.status}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="recent-students-pane" role="tabpanel" aria-labelledby="recent-students"
+                tabindex="0">
+                <table class="table">
+                    <thead class="table-dark">
+                        <tr style="text-align: center;">
+                            <th scope="col">#sNo</th>
+                            <th scope="col">Student Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Phone No</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Registration Date</th>
+                            <th scope="col">Status</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="book : ${all_books_list}" style="text-align: center;">
+                        <th th:text="${book.id}" scope="row"></th>
+                        <td th:text="${book.bookName}"></td>
+                        <td th:text="${book.bookTitle}"></td>
+                        <td th:text="${book.publisherName}"></td>
+                        <td th:text="${book.authorName}"></td>
+                        <td th:text="${book.quantity}"></td>
+                        <td th:text="${book.status}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="recent-loans-pane" role="tabpanel" aria-labelledby="recent-loans"
+                tabindex="0">
+                <table class="table">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">#sNo</th>
+                            <th scope="col">Book Name</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Pub Name</th>
+                            <th scope="col">Author Name</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Quantity</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="book : ${all_books_list}">
+                            <th th:text="${book.id}" scope="row"></th>
+                            <td th:text="${book.bookName}"></td>
+                            <td th:text="${book.bookTitle}"></td>
+                            <td th:text="${book.publisherName}"></td>
+                            <td th:text="${book.authorName}"></td>
+                            <td th:text="${book.quantity}"></td>
+                            <td th:text="${book.status}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        </div>
+    </main>
+
+    <!-- main content end -->
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/88394ab969.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

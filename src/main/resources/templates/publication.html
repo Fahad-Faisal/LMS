@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Dashboard</title>
+</head>
+
+<body>
+<!-- top navbar start -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <!-- offcanvas-trigger start -->
+        <button class="navbar-toggler me-2" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- offcanvas-trigger end -->
+        <a class="navbar-brand fw-bold text-uppercase me-auto" href="/dashboard">SEU Library</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form class="d-flex ms-auto" role="search">
+                <div class="input-group my-3 my-lg-0">
+                    <input type="text" class="form-control" placeholder="Search..."
+                           aria-label="Recipient's username" aria-describedby="button-addon2" />
+                    <button class="btn btn-outline-secondary btn-primary text-white" type="button"
+                            id="button-addon2">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </form>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        <img class="user-icon" src="./assets/images/profile-pic.jpg" alt="admin picture" />
+                        Admin
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#">View Profile</a></li>
+                        <li><a class="dropdown-item" href="#">About</a></li>
+                        <li>
+                            <hr class="dropdown-divider" />
+                        </li>
+                        <li><a class="dropdown-item" href="/logout">logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- top navbar end -->
+
+<!-- offcanvas start -->
+<div class="offcanvas offcanvas-start bg-dark text-white sidebar-nav" tabindex="-1" id="offcanvasExample"
+     aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-body">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <div class="text-secondary small text-uppercase fw-bold">Core</div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/dashboard"><i
+                        class="fa-solid fa-gauge-high"></i>Dashboard</a>
+            </li>
+            <li class="nav-item my-0">
+                <hr />
+            </li>
+            <li class="nav-item">
+                <div class="text-secondary small text-uppercase fw-bold">
+                    Inventory
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active sidebar-link" data-bs-toggle="collapse" href="#booksMgt" role="button"
+                   aria-expanded="false" aria-controls="booksMgt">
+                    <i class="fa-solid fa-book-open me-2"></i>Books Management
+                    <span class="right-icon float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                </a>
+                <div class="collapse" id="booksMgt">
+                    <div>
+                        <ul class="navbar-nav ps-3">
+                            <li>
+                                <a class="nav-link active" href="/book"><i
+                                        class="fa-solid fa-plus me-2"></i>Add New</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active sidebar-link" data-bs-toggle="collapse" href="#studentsMgt" role="button"
+                   aria-expanded="false" aria-controls="studentsMgt">
+                    <i class="fa-solid fa-users me-2"></i>Students
+                    <span class="right-icon float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                </a>
+                <div class="collapse" id="studentsMgt">
+                    <div>
+                        <ul class="navbar-nav ps-3">
+                            <li>
+                                <a class="nav-link active" href="/student"><i
+                                        class="fa-solid fa-plus me-2"></i>Add New</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item my-0">
+                <hr />
+            </li>
+            <li class="nav-item">
+                <div class="text-secondary small text-uppercase fw-bold">
+                    Business
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active sidebar-link" data-bs-toggle="collapse" href="#loanMgt" role="button"
+                   aria-expanded="false" aria-controls="loanMgt">
+                    <i class="fa-solid fa-book me-2"></i>Books loan
+                    <span class="right-icon float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                </a>
+                <div class="collapse" id="loanMgt">
+                    <div>
+                        <ul class="navbar-nav ps-3">
+                            <li>
+                                <a class="nav-link active" href="/lendBook"><i class="fa-solid fa-plus me-2"></i>Add New</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active sidebar-link" data-bs-toggle="collapse" href="#subscriotionMgt"
+                   role="button" aria-expanded="false" aria-controls="subscriotionMgt">
+                    <i class="fa-solid fa-bangladeshi-taka-sign me-2"></i>Vendor & Publisher
+                    <span class="right-icon float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                </a>
+                <div class="collapse" id="subscriotionMgt">
+                    <div>
+                        <ul class="navbar-nav ps-3">
+                            <li>
+                                <a class="nav-link active" href="/vendor"><i class="fa-solid fa-plus me-2"></i>Add New Vendor</a>
+                            </li>
+                            <li>
+                                <a class="nav-link active" href="/publication"><i class="fa-solid fa-plus me-2"></i>Add New Publisher</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item my-0">
+                <hr />
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/logout"><i
+                        class="fa-solid fa-arrow-right-from-bracket me-2"></i>Logout</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- offcanvas end -->
+
+<!-- main content start -->
+<main class="mt-1 pt-3 ps-4 me-4">
+    <div class="card">
+        <div class="card-body">
+            <i class="fa-solid fa-house"></i> / Publications Management
+            <div>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#addNewPublication"
+                        class="btn btn-primary position-absolute top-50 end-0 translate-middle-y me-2">
+                    <i class="fa-solid fa-plus"></i>Add Publications
+                </button>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">Publications List</div>
+            <div class="card-body">
+                <table class="table">
+                    <thead class="table-dark">
+                    <tr style="text-align: center;">
+                        <th scope="col">#sNo</th>
+                        <th scope="col">Publisher Name</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="publication : ${publishers}" style="text-align: center;">
+                        <th th:text="${publication.id}" scope="row"></th>
+                        <td th:text="${publication.publisherName}"></td>
+                        <td th:text="${publication.address}"></td>
+                        <td th:text="${publication.description}"></td>
+                        <td>
+                            <button type="button" class="btn btn-primary editBtn" data-bs-toggle="modal"
+                                    data-bs-target="#editPublicationModal"
+                                    th:data-id="${publication.id}"
+                                    th:data-name="${publication.publisherName}"
+                                    th:data-address="${publication.address}"
+                                    th:data-description="${publication.description}">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                            <a th:href="@{/publication/delete/{id}(id=${publication.id})}"
+                               onclick="return confirm('Are you sure you want to delete this publication?')"
+                               type="button" class="btn btn-danger">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- main content end -->
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editPublicationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="editPublicationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="editPublicationModalLabel">
+                    Edit Publisher
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/publication/update}" th:object="${publication}" th:method="POST">
+                    <input type="hidden" id="editId" name="id" />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="editPublisherName" class="form-label">Publisher Name</label>
+                                <input th:field="*{publisherName}" type="text" class="form-control" id="editPublisherName" name="publisherName" required />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="editAddress" class="form-label">Address</label>
+                                <input  th:field="*{address}" type="text" id="editAddress" class="form-control" name="address" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3">
+                            <label for="editDescription" class="form-label">Description</label>
+                            <textarea th:field="*{description}" id="editDescription" class="form-control" name="description"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Modal -->
+<div class="modal fade" id="addNewPublication" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="addNewPublicationLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="addNewPublicationLabel">
+                    Add Publisher
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/publication/save}" th:object="${publication}" th:method="POST">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="publisherName" class="form-label">Publisher Name</label>
+                                <input th:field="*{publisherName}" type="text" class="form-control" id="publisherName" name="publisherName" required />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Address</label>
+                                <input th:field="*{address}" type="text" class="form-control" id="address" name="address" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea th:field="*{description}" class="form-control" id="description" name="description"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        // When edit button is clicked
+        $('.editBtn').on('click', function() {
+            // Get data from button attributes
+            var id = $(this).data('id');
+            var publisherName = $(this).data('name');
+            var address = $(this).data('address');
+            var description = $(this).data('description');
+
+            console.log('Loading data:', {id, publisherName, address, description});
+
+            // Populate the edit modal form fields
+            $('#editId').val(id);
+            $('#editPublisherName').val(publisherName);
+            $('#editAddress').val(address);
+            $('#editDescription').val(description);
+        });
+
+        // Clear form when modal is hidden
+        $('#editPublicationModal').on('hidden.bs.modal', function() {
+            $('#editId').val('');
+            $('#editPublisherName').val('');
+            $('#editAddress').val('');
+            $('#editDescription').val('');
+        });
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/88394ab969.js" crossorigin="anonymous"></script>
+</body>
+</html>
