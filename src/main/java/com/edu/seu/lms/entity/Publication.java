@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "publications")
 @Getter
@@ -15,6 +18,8 @@ public class Publication {
     private String publisherName;
     private String address;
     private String description;
+    @OneToMany(mappedBy = "publication")
+    List<Book>books=new ArrayList<>();
 
 
 }

@@ -42,7 +42,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false">
-                        <img class="user-icon" src="./assets/images/profile-pic.jpg" alt="admin picture"/>
+                        <img class="user-icon" src="/images/profile-pic.jpg" alt="admin picture"/>
                         Admin
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
@@ -289,6 +289,14 @@
                     </div>
                     <div class="row">
                         <div class="mb-3">
+                            <label for="type" class="form-label">Sub Type</label>
+                            <select th:field="*{subType}" class="form-control" id="type">
+                                <option th:value="Normal">Normal</option>
+                                <option th:value="Premium">Premium</option>
+                                <option th:value="Platinum">Platinum</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
                             <label for="address" class="form-label">Address</label>
                             <textarea th:field="*{address}" class="form-control" id="address"
                                       name="address" required></textarea>
@@ -355,6 +363,14 @@
 
                         <div class="col-md-6">
 
+                        </div>
+                        <div class="mb-3">
+                            <label for="editType" class="form-label">Sub Type</label>
+                            <select th:field="*{subType}" class="form-control" id="editType">
+                                <option th:value="Normal">Normal</option>
+                                <option th:value="Premium">Premium</option>
+                                <option th:value="Platinum">Platinum</option>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="editAddress" class="form-label">Address</label>

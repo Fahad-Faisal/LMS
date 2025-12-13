@@ -2,12 +2,10 @@ package com.edu.seu.lms.controllers;
 
 import com.edu.seu.lms.dto.UserDto;
 import com.edu.seu.lms.entity.Book;
+import com.edu.seu.lms.entity.LendHistory;
 import com.edu.seu.lms.entity.Student;
 import com.edu.seu.lms.entity.User;
-import com.edu.seu.lms.repository.BookRepository;
-import com.edu.seu.lms.repository.PublicationRepository;
-import com.edu.seu.lms.repository.StudentRepository;
-import com.edu.seu.lms.repository.VendorRepository;
+import com.edu.seu.lms.repository.*;
 import com.edu.seu.lms.service.UserService;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -33,6 +31,7 @@ public class LoginController {
     BookRepository bookRepository;
     VendorRepository vendorRepository;
     PublicationRepository publicationRepository;
+    LendHistoryRepository lendHistoryRepository;
 
     @GetMapping("login")// if the session is valid redirect to dashboard without login again
     public String showLogin(Model model,RedirectAttributes redirectAttributes, HttpSession httpSession){
@@ -65,14 +64,16 @@ public class LoginController {
         int totalbook=bookRepository.findAll().size();
         int totalvendor=vendorRepository.findAll().size();
         int toalpublisher=publicationRepository.findAll().size();
-        List<Book> allBooks=bookRepository.findAll(Sort.by(Sort.Direction.ASC,"id"));
-        List<Student> students=studentRepository.findAll(Sort.by(Sort.Direction.ASC,"id"));
+        List<Book> allBooks=bookRepository.findAll(Sort.by(Sort.Direction.DESC,"id"));
+        List<Student> students=studentRepository.findAll(Sort.by(Sort.Direction.DESC,"id"));
+        List<LendHistory>lendHistories=lendHistoryRepository.findAll(Sort.by(Sort.Direction.DESC,"id"));
         model.addAttribute("all_student_list",students);
         model.addAttribute("all_books_list",allBooks);
         model.addAttribute("t_student",totalStudent);
         model.addAttribute("t_book",totalbook);
         model.addAttribute("t_vendor",totalvendor);
         model.addAttribute("t_publisher",toalpublisher);
+        model.addAttribute("lendHistory",lendHistories);
         if (Objects.nonNull(currentUser)){
             model.addAttribute("user",currentUser);
             return "dashboard";

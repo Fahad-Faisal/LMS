@@ -1,6 +1,12 @@
 package com.edu.seu.lms.controllers;
+import com.edu.seu.lms.dto.LendHistoryDto;
+import com.edu.seu.lms.entity.Book;
 import com.edu.seu.lms.entity.LendHistory;
+import com.edu.seu.lms.entity.Student;
+import com.edu.seu.lms.repository.BookRepository;
 import com.edu.seu.lms.repository.LendHistoryRepository;
+import com.edu.seu.lms.repository.StudentRepository;
+import com.edu.seu.lms.service.LendHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,20 +22,31 @@ public class LendHistoryController {
 
     @Autowired
     private LendHistoryRepository lendHistoryRepository;
+    @Autowired
+    StudentRepository studentRepository;
+    @Autowired
+    BookRepository bookRepository;
+    @Autowired
+    LendHistoryService service;
     @GetMapping
     public String showLendHistory(Model model) {
         List<LendHistory> lendHistorys = lendHistoryRepository.findAll();
+        List<Book>books=bookRepository.findAll();
+        List<Student>students=studentRepository.findAll();
+        model.addAttribute("books",books);
+        model.addAttribute("students",students);
         model.addAttribute("lendHistorys", lendHistorys);
-        model.addAttribute("lendHistory", new LendHistory());
+        model.addAttribute("dto", new LendHistoryDto());
         return "lendBook";
     }
 
     @PostMapping("/save")
-    public String saveLendHistory(@ModelAttribute LendHistory lendHistory,
-                           RedirectAttributes redirectAttributes) {
-        lendHistory.setStatus("Alloted");
+    public String saveLendHistory(@ModelAttribute LendHistoryDto dto,
+                                  RedirectAttributes redirectAttributes) {
+
         try {
-            lendHistoryRepository.save(lendHistory);
+            service.add(dto);
+
             redirectAttributes.addFlashAttribute("successMessage", "LendHistory added successfully!");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Error adding lendHistory: " + e.getMessage());
@@ -40,15 +57,9 @@ public class LendHistoryController {
     @GetMapping("/update/{id}")
     public String updateLendHistory(@ModelAttribute LendHistory lendHistory,
                              RedirectAttributes redirectAttributes) {
-        System.out.println("check0");
+
         try {
-            Optional<LendHistory> existingLendHistory = lendHistoryRepository.findById(lendHistory.getId());
-            System.out.println("check1");
-            if (existingLendHistory.isPresent()) {
-                lendHistory.setStatus("Returned");
-                System.out.println("check2");
-                System.out.println(lendHistory);
-                lendHistoryRepository.save(lendHistory);
+            if (service.returnBook(lendHistory)){
                 redirectAttributes.addFlashAttribute("successMessage", "LendHistory updated successfully!");
             } else {
                 redirectAttributes.addFlashAttribute("errorMessage", "LendHistory not found!");

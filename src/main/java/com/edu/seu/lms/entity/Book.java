@@ -1,15 +1,15 @@
 package com.edu.seu.lms.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -26,4 +26,9 @@ public class Book {
     private String status;
     private int quantity;
     private String description;
+    @ManyToMany
+    List<LendHistory>lendHistories=new ArrayList<>();
+    @ManyToOne
+    Publication publication;
+
 }

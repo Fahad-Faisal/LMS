@@ -7,6 +7,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "vendors")
 @Getter
@@ -20,4 +23,6 @@ public class Vendor {
     @CreationTimestamp
     private LocalDate date;
     private String phoneNumber;
+//    @OneToMany(mappedBy = "vendor")
+//    List<Book> books=new ArrayList<>();
 }

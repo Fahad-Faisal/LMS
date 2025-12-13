@@ -7,6 +7,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -22,4 +25,10 @@ public class Student {
     @CreationTimestamp
     private LocalDate regDate;
     private String status;
+    private String subType;
+    private int takenBooks;
+    @ManyToMany
+    List<LendHistory>lendHistories=new ArrayList<>();
+    @ManyToOne
+    Subscription subscription;
 }

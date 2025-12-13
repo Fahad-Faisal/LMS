@@ -9,6 +9,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class BookDto {
     private Long id;
     private String bookName;

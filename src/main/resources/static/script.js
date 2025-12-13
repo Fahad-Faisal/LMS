@@ -1,3 +1,6 @@
+
+/* global bootstrap */
+window.bootstrap = bootstrap;
 function myFunction() {
   var x = document.getElementById("exampleInputPassword1");
   if (x.type === "password") {
@@ -38,3 +41,15 @@ function myFunction() {
         });
     });
 }
+
+// function triggerToast(){
+    const toastTrigger = document.getElementById('liveToastBtn')
+    const toastLiveExample = document.getElementById('liveToast')
+
+    if (toastTrigger) {
+        const toastBootstrap =bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+        toastTrigger.addEventListener('click', () => {
+            toastBootstrap.show()
+        })
+    }
+// }

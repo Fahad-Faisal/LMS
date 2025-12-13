@@ -1,6 +1,8 @@
 package com.edu.seu.lms.controllers;
 import com.edu.seu.lms.entity.Book;
+import com.edu.seu.lms.entity.Publication;
 import com.edu.seu.lms.repository.BookRepository;
+import com.edu.seu.lms.repository.PublicationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,11 +17,15 @@ import java.util.Optional;
 public class BookController {
 
     @Autowired
+    PublicationRepository publicationRepository;
+    @Autowired
     private BookRepository bookRepository;
     @GetMapping
     public String showBooks(Model model) {
         List<Book> books = bookRepository.findAll();
+        List<Publication>publications=publicationRepository.findAll();
         model.addAttribute("books", books);
+        model.addAttribute("publishers", publications);
         model.addAttribute("book", new Book());
         return "book";
     }

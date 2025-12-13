@@ -5,9 +5,16 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="./assets/css/style.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        // Make bootstrap available globally
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <title>Dashboard</title>
 </head>
 
@@ -42,7 +49,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false">
-                        <img class="user-icon" src="./assets/images/profile-pic.jpg" alt="admin picture"/>
+                        <img class="user-icon" src="/images/profile-pic.jpg" alt="admin picture"/>
                         Admin
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
@@ -229,10 +236,24 @@
             </div>
         </div>
     </div>
+<!--    <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>-->
+<div class="toast-container  position-fixed top-0 end-0 p-3">
+    <div id="liveToast" th:if="${successMessage}" class="toast align-items-center text-bg-success" role="alert" data-bs-delay="10000"
+         aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body" >
+                Saved Successfully
+            </div>
+            <button type="button" class="btn-close me-2 m-auto"
+                    data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
 </main>
 <!-- main content end -->
+<!--toast start-->
 
-
+<!--toast end-->
 <!-- Add Modal -->
 <div class="modal fade" id="addNewBook" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
      aria-labelledby="addNewBookLabel" aria-hidden="true">
@@ -245,36 +266,48 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form th:action="@{/lendBook/save}" th:object="${lendHistory}" th:method="POST">
+                <form th:action="@{/lendBook/save}" th:object="${dto}" th:method="POST">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="bookName" class="form-label">Book Name</label>
-                                <input th:field="*{bookName}" type="text" class="form-control" id="bookName"
-                                       name="bookName" required/>
+<!--                                <input th:field="*{bookName}" type="text" class="form-control" id="bookName"-->
+<!--                                       name="bookName" required/>-->
+                                <select class="form-control" id="bookName" th:field="*{bookId}">
+                                    <option value=""> -- Select a Country -- </option>
+                                    <option th:each="book : ${books}"
+                                            th:value="${book.id}"
+                                            th:text="${book.bookName}">
+                                    </option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="bookTitle" class="form-label">Student Name</label>
-                                <input th:field="*{studentName}" type="text" class="form-control" id="bookTitle"
-                                       name="bookTitle" required/>
+<!--                                <input th:field="*{studentName}" type="text" class="form-control" id="bookTitle"-->
+<!--                                       name="bookTitle" required/>-->
+                                <select id="bookTitle" class="form-control" th:field="*{studentId}" >
+                                    <option th:each="student: ${students}"
+                                    th:value="${student.id}"
+                                    th:text="${student.name}"></option>
+                                </select>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="publisher" class="form-label">Current Date</label>
-                                <input th:field="*{createAt}" type="date" class="form-control" id="publisher"
-                                       name="publisher" required/>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="author" class="form-label">Return Date</label>
-                                <input th:field="*{returnDate}" type="date" class="form-control" id="author"
-                                       name="author"
-                                       required/>
-                            </div>
+<!--                        <div class="col-md-6">-->
+<!--                            <div class="mb-3">-->
+<!--                                <label for="publisher" class="form-label">Current Date</label>-->
+<!--                                <input th:field="*{createAt}" type="date" class="form-control" id="publisher"-->
+<!--                                       name="publisher" required/>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-6">-->
+<!--                            <div class="mb-3">-->
+<!--                                <label for="author" class="form-label">Return Date</label>-->
+<!--                                <input th:field="*{returnDate}" type="date" class="form-control" id="author"-->
+<!--                                       name="author"-->
+<!--                                       required/>-->
+<!--                            </div>-->
 <!--                        </div><div class="col-md-6">-->
 <!--                            <div class="mb-3">-->
 <!--                                <label for="status" class="form-label">Status</label>-->
@@ -287,14 +320,16 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button id="liveToastBtn" type="submit" class="btn btn-primary">Save</button>
+<!--                        <button type="button" onclick="triggerToast()" class="btn btn-primary"-->
+<!--                                id="liveToastBtn">Show live toast</button>-->
+
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
 <script>
     $(document).ready(function () {
         // When edit button is clicked
@@ -336,5 +371,7 @@
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/88394ab969.js" crossorigin="anonymous"></script>
+<script src="/script.js"></script>
+
 </body>
 </html>
