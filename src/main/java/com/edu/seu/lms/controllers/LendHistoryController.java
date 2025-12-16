@@ -31,6 +31,9 @@ public class LendHistoryController {
     @GetMapping
     public String showLendHistory(Model model) {
         List<LendHistory> lendHistorys = lendHistoryRepository.findAll();
+        if (lendHistorys.size()>1){
+        lendHistorys=lendHistorys.stream().filter(h->h.getStatus().equals("Allotted")).toList();
+        }
         List<Book>books=bookRepository.findAll();
         List<Student>students=studentRepository.findAll();
         model.addAttribute("books",books);
@@ -45,11 +48,16 @@ public class LendHistoryController {
                                   RedirectAttributes redirectAttributes) {
 
         try {
-            service.add(dto);
-
-            redirectAttributes.addFlashAttribute("successMessage", "LendHistory added successfully!");
+            String response=service.add(dto);
+            if (response.equals("ok")){
+            redirectAttributes.addFlashAttribute("successMessage", "Book assigned successfully!");
+            } else if (response.equals("Plan limit Reached")) {
+                redirectAttributes.addFlashAttribute("limit","Plan limit Reached,Return a book or Take Platinum");
+            }else {
+                redirectAttributes.addFlashAttribute("Fine","Due Payments");
+            }
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Error adding lendHistory: " + e.getMessage());
+            redirectAttributes.addFlashAttribute("errorMessage", "Error adding Book: " + e.getMessage());
         }
         return "redirect:/lendBook";
     }
@@ -60,7 +68,7 @@ public class LendHistoryController {
 
         try {
             if (service.returnBook(lendHistory)){
-                redirectAttributes.addFlashAttribute("successMessage", "LendHistory updated successfully!");
+                redirectAttributes.addFlashAttribute("successMessage", "Book Returned successfully!");
             } else {
                 redirectAttributes.addFlashAttribute("errorMessage", "LendHistory not found!");
             }

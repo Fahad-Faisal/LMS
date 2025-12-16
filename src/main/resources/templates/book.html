@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <title>Dashboard</title>
+    <title>SEU Library | Book</title>
 </head>
 
 <body>
@@ -61,113 +61,139 @@
 <!-- top navbar end -->
 
 <!-- offcanvas start -->
-<div class="offcanvas offcanvas-start bg-dark text-white sidebar-nav" tabindex="-1" id="offcanvasExample"
+<div class="offcanvas offcanvas-start bg-dark text-white sidebar-nav z-0" tabindex="-1" id="offcanvasExample"
      aria-labelledby="offcanvasExampleLabel">
     <div class="offcanvas-body">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <div class="text-secondary small text-uppercase fw-bold">Core</div>
+                <div class="text-secondary small text-uppercase fw-bold">
+                    Core
+                </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/dashboard"><i
-                        class="fa-solid fa-gauge-high"></i>Dashboard</a>
+                <a class="nav-link active" aria-current="page" href="/dashboard"><i class="fa-regular fa-house"></i>
+                    Dashboard</a>
             </li>
             <li class="nav-item my-0">
-                <hr/>
+                <hr>
             </li>
             <li class="nav-item">
                 <div class="text-secondary small text-uppercase fw-bold">
                     Inventory
                 </div>
             </li>
+            <!-- books Management -->
             <li class="nav-item">
                 <a class="nav-link active sidebar-link" data-bs-toggle="collapse" href="#booksMgt" role="button"
                    aria-expanded="false" aria-controls="booksMgt">
                     <i class="fa-solid fa-book-open me-2"></i>Books Management
-                    <span class="right-icon float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                    <span class="right-icon float-end"><i class="fa-solid fa-chevron-down  "></i></span>
                 </a>
                 <div class="collapse" id="booksMgt">
                     <div>
                         <ul class="navbar-nav ps-3">
                             <li>
-                                <a class="nav-link active" href="/book"><i
-                                        class="fa-solid fa-plus me-2"></i>Add New</a>
+                                <a class="nav-link active" href="/book"><i class="fa-solid fa-plus me-2"></i>Add New</a>
                             </li>
-
                         </ul>
                     </div>
                 </div>
             </li>
+            <!-- Students -->
             <li class="nav-item">
-                <a class="nav-link active sidebar-link" data-bs-toggle="collapse" href="#studentsMgt" role="button"
+                <a class="nav-link active sidebar-link" data-bs-toggle="collapse" href="#studentsMgt"
+                   role="button"
                    aria-expanded="false" aria-controls="studentsMgt">
                     <i class="fa-solid fa-users me-2"></i>Students
-                    <span class="right-icon float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                    <span class="right-icon float-end"><i class="fa-solid fa-chevron-down  "></i></span>
                 </a>
                 <div class="collapse" id="studentsMgt">
                     <div>
                         <ul class="navbar-nav ps-3">
                             <li>
-                                <a class="nav-link active" href="/student"><i
-                                        class="fa-solid fa-plus me-2"></i>Add New</a>
+                                <a class="nav-link active" href="/student"><i class="fa-solid fa-plus me-2"></i>Add
+                                    New</a>
                             </li>
+                            <li></li>
                         </ul>
                     </div>
                 </div>
             </li>
             <li class="nav-item my-0">
-                <hr/>
+                <hr>
             </li>
             <li class="nav-item">
                 <div class="text-secondary small text-uppercase fw-bold">
                     Business
                 </div>
             </li>
+            <!-- books loan -->
             <li class="nav-item">
                 <a class="nav-link active sidebar-link" data-bs-toggle="collapse" href="#loanMgt" role="button"
                    aria-expanded="false" aria-controls="loanMgt">
-                    <i class="fa-solid fa-book me-2"></i>Books loan
-                    <span class="right-icon float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                    <i class="fa-solid fa-book me-2"></i>Books Allotment
+                    <span class="right-icon float-end"><i class="fa-solid fa-chevron-down  "></i></span>
                 </a>
                 <div class="collapse" id="loanMgt">
                     <div>
                         <ul class="navbar-nav ps-3">
                             <li>
-                                <a class="nav-link active" href="/lendBook"><i class="fa-solid fa-plus me-2"></i>Add New</a>
+                                <a class="nav-link active" href="/lendBook"><i
+                                        class="fa-solid fa-plus me-2"></i>Add New</a>
                             </li>
+
+                            <li></li>
                         </ul>
                     </div>
+
+                    <li class="nav-item">
+                        <a class="nav-link active sidebar-link" data-bs-toggle="collapse"
+                           href="#subscriotionMgt"
+                           role="button" aria-expanded="false" aria-controls="subscriotionMgt">
+                            <i class="fa-solid fa-bangladeshi-taka-sign me-2"></i>Subscription Plan
+                            <span class="right-icon float-end"><i class="fa-solid fa-chevron-down  "></i></span>
+                        </a>
+                        <div class="collapse" id="subscriotionMgt">
+                            <div>
+                                <ul class="navbar-nav ps-3">
+                                    <li>
+                                        <a class="nav-link active" href="/subscription"><i
+                                                class="fa-solid fa-plus me-2"></i>Add New Plan</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active sidebar-link" data-bs-toggle="collapse"
+                           href="#vendorAndPublictionMgt"
+                           role="button" aria-expanded="false" aria-controls="vendorAndPublictionMgt">
+                            <i class="fa-solid fa-swatchbook"></i> Vendor & Publisher
+                            <span class="right-icon float-end"><i class="fa-solid fa-chevron-down  "></i></span>
+                        </a>
+                        <div class="collapse" id="vendorAndPublictionMgt">
+                            <div>
+                                <ul class="navbar-nav ps-3">
+                                    <li>
+                                        <a class="nav-link active" href="/vendor"><i
+                                                class="fa-solid fa-plus me-2"></i>Add New Vendor</a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link active" href="publication"><i
+                                                class="fa-solid fa-plus me-2"></i>Add New Publisher</a>
+                                    </li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item my-0">
+                        <hr>
+                    </li>
+                    <a class="nav-link active" href="/logout"><i
+                            class="fa-solid fa-arrow-right-from-bracket me-2"></i>Logout</a>
                 </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active sidebar-link" data-bs-toggle="collapse" href="#subscriotionMgt"
-                   role="button" aria-expanded="false" aria-controls="subscriotionMgt">
-                    <i class="fa-solid fa-bangladeshi-taka-sign me-2"></i>Vendor & Publisher
-                    <span class="right-icon float-end"><i class="fa-solid fa-chevron-down"></i></span>
-                </a>
-                <div class="collapse" id="subscriotionMgt">
-                    <div>
-                        <ul class="navbar-nav ps-3">
-                            <li>
-                                <a class="nav-link active" href="/vendor"><i class="fa-solid fa-plus me-2"></i>Add New
-                                    Vendor</a>
-                            </li>
-                            <li>
-                                <a class="nav-link active" href="/publication"><i class="fa-solid fa-plus me-2"></i>Add
-                                    New
-                                    Publisher</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item my-0">
-                <hr/>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="/logout"><i
-                        class="fa-solid fa-arrow-right-from-bracket me-2"></i>Logout</a>
-            </li>
         </ul>
     </div>
 </div>
@@ -187,6 +213,11 @@
         </div>
     </div>
     <br/>
+    <div class="alert alert-success" role="alert" th:if="${successMessage}" >
+        <div th:text="${successMessage}"></div>
+    </div><div class="alert alert-danger" role="alert" th:if="${errorMessage}" >
+        <div th:text="${errorMessage}"></div>
+    </div>
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">Books List</div>
@@ -196,9 +227,8 @@
                     <tr style="text-align: center;">
                         <th scope="col">#sNo</th>
                         <th scope="col">Book Name</th>
-                        <th scope="col">Book Title</th>
-                        <th scope="col">Publication</th>
                         <th scope="col">Author</th>
+                        <th scope="col">Publication</th>
                         <th scope="col">Quantity</th>
                         <th scope="col">Status</th>
                         <th scope="col">Action</th>
@@ -208,19 +238,33 @@
                     <tr th:each="book : ${books}" style="text-align: center;">
                         <th th:text="${book.id}" scope="row"></th>
                         <td th:text="${book.bookName}"></td>
-                        <td th:text="${book.bookTitle}"></td>
-                        <td th:text="${book.publisherName}"></td>
                         <td th:text="${book.authorName}"></td>
-                        <td th:text="${book.quantity}"></td>
-                        <td th:text="${book.status}"></td>
+                        <td th:text="${book.publisherName}"></td>
+<!--                        <td th:text="${book.quantity}"></td>-->
+                        <td>
+    <span th:class="'badge ' +
+        (${book.quantity} > 10 ? 'bg-success' :
+        (${book.quantity} >= 3 ? 'bg-warning' : 'bg-danger'))">
+
+        <span th:text="${book.quantity}"></span>
+        <span th:if="${book.quantity > 10}"> (Good Stock)</span>
+        <span th:if="${book.quantity >= 3 and book.quantity <= 10}"> (Low Stock)</span>
+        <span th:if="${book.quantity < 3}"> (Critical)</span>
+    </span>
+                        </td>
+<!--                        <td th:text="${book.status}"></td>-->
+                        </td>
+                        <!--                        <td th:text="${book.status}"></td>-->
+                        <td th:class="${book.status == 'Available'} ? ' badge bg-success text-white' : 'badge bg-danger text-white'"
+                            th:text="${book.status}">
+                        </td>
                         <td>
                             <button type="button" class="btn btn-primary editBtn" data-bs-toggle="modal"
                                     data-bs-target="#editBookModal"
                                     th:data-id="${book.id}"
                                     th:data-name="${book.bookName}"
-                                    th:data-title="${book.bookTitle}"
-                                    th:data-publisher="${book.publisherName}"
                                     th:data-author="${book.authorName}"
+                                    th:data-publisher="${book.publisherName}"
                                     th:data-quantity="${book.quantity}"
                                     th:data-status="${book.status}"
                             >
@@ -265,9 +309,10 @@
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="bookTitle" class="form-label">Book Title</label>
-                                <input th:field="*{bookTitle}" type="text" class="form-control" id="bookTitle"
-                                       name="bookTitle" required/>
+                                <label for="author" class="form-label">Author</label>
+                                <input th:field="*{authorName}" type="text" class="form-control" id="author"
+                                       name="author"
+                                       required/>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -283,19 +328,14 @@
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="author" class="form-label">Author</label>
-                                <input th:field="*{authorName}" type="text" class="form-control" id="author"
-                                       name="author"
-                                       required/>
+                                <label for="quantity" class="form-label">Quantity</label>
+                                <input th:field="*{quantity}" type="number" value="10" class="form-control" id="quantity"
+                                       name="status"></input>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="mb-3">
-                            <label for="quantity" class="form-label">Quantity</label>
-                            <input th:field="*{quantity}" type="text" value="10" class="form-control" id="quantity"
-                                   name="status"></input>
-                        </div>
+
                         <div class="mb-3">
                             <label for="status" class="form-label">Status</label>
 <!--                            <input th:field="*{status}" type="text" class="form-control" id="status"-->
@@ -339,9 +379,10 @@
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="editBookTitle" class="form-label">Book Title</label>
-                                <input th:field="*{bookTitle}" type="text" class="form-control" id="editBookTitle"
-                                       name="bookTitle" required/>
+                                <label for="editBookAuthor" class="form-label">Author Name</label>
+                                <input th:field="*{authorName}" type="tel" class="form-control" id="editBookAuthor"
+                                       name="author"
+                                       required/>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -354,19 +395,14 @@
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="editBookAuthor" class="form-label">Author Name</label>
-                                <input th:field="*{authorName}" type="tel" class="form-control" id="editBookAuthor"
-                                       name="author"
-                                       required/>
+                                <label for="editBookQuantity" class="form-label">Quantity</label>
+                                <input th:field="*{quantity}" type="number"  class="form-control" id="editBookQuantity"
+                                       name="status"></input>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="mb-3">
-                            <label for="editBookQuantity" class="form-label">Quantity</label>
-                            <input th:field="*{quantity}" type="number"  class="form-control" id="editBookQuantity"
-                                   name="status"></input>
-                        </div>
+
                         <div class="mb-3">
                             <label for="editBookStatus" class="form-label">Status</label>
                             <!--                        <input th:field="*{status}" type="text" class="form-control" id="editBookStatus"-->

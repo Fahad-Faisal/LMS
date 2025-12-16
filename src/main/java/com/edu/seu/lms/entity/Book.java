@@ -18,16 +18,14 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String bookName;
-    private String bookTitle;
     private String publisherName;
     private String authorName;
     @CreationTimestamp
     private LocalDate purchaseDate;
     private String status;
     private int quantity;
-    private String description;
     @ManyToMany
-    List<LendHistory>lendHistories=new ArrayList<>();
+    List<LendHistory>lendHistory=new ArrayList<>();
     @ManyToOne
     Publication publication;
 

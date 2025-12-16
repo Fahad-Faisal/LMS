@@ -21,7 +21,7 @@ public class Subscription {
     private String subType;
     private int fees;
     private int subscribers;
-    @OneToMany(mappedBy = "subscription",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "subscription",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     List<Student> students =new ArrayList<>();
 
 }

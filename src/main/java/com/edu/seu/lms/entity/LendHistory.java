@@ -22,15 +22,17 @@ public class LendHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String bookName;
+    private Long bookId;
     private String studentName;
+    private Long studentId;
     @CreationTimestamp
     private LocalDate createAt;
     private LocalDate returnDate;
     private String status;
     private int fine;
-    @OneToMany(mappedBy = "lendHistory")
+    @ManyToMany(mappedBy = "lendHistories", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     List<Student>students=new ArrayList<>();
-    @ManyToMany(mappedBy = "lendHistories")
+    @ManyToMany(mappedBy = "lendHistory", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     List<Book>books=new ArrayList<>();
 
 }

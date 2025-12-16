@@ -25,8 +25,8 @@ public class PublicationController {
 
     @GetMapping
     public String showPublications(Model model) {
-        List<Publication> publishers = publicationRepository.findAll();
-        model.addAttribute("publishers", publishers);
+        List<Publication> publications = publicationRepository.findAll();
+        model.addAttribute("publishers", publications);
         model.addAttribute("publication", new Publication());
         return "publication";
     }

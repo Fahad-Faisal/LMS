@@ -4,6 +4,7 @@ import com.edu.seu.lms.entity.Student;
 import com.edu.seu.lms.entity.Subscription;
 import com.edu.seu.lms.repository.StudentRepository;
 import com.edu.seu.lms.repository.SubscriptionRepository;
+import com.edu.seu.lms.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -26,7 +27,7 @@ public class StudentController {
 
     @Autowired
     private StudentRepository studentRepository;
-
+    private final StudentService service;
     private final SubscriptionRepository subscriptionRepository;
     @GetMapping
     public String showStudents(Model model) {
@@ -41,13 +42,7 @@ public class StudentController {
                                   RedirectAttributes redirectAttributes) {
         try {
 
-            Subscription subscription=subscriptionRepository.findBySubType(student.getSubType());
-            student.setSubscription(subscription);
-            subscription.setSubscribers(subscription.getSubscribers()+1);
-            subscriptionRepository.save(subscription);
-
-            studentRepository.save(student);
-
+            service.addStudent(student);
             redirectAttributes.addFlashAttribute("successMessage", "Student added successfully!");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Error adding student: " + e.getMessage());
@@ -76,8 +71,12 @@ public class StudentController {
     @GetMapping("/delete/{id}")
     public String deleteStudent(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         try {
-            studentRepository.deleteById(id);
+            if (service.deleteStudent(id)){
             redirectAttributes.addFlashAttribute("successMessage", "Student deleted successfully!");
+            }else{
+                redirectAttributes.addFlashAttribute("errorMessage","Student may have books or due payments");
+            }
+
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Error deleting student: " + e.getMessage());
         }

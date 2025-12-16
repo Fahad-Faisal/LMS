@@ -27,6 +27,7 @@ public class Student {
     private String status;
     private String subType;
     private int takenBooks;
+    private int dues;
     @ManyToMany
     List<LendHistory>lendHistories=new ArrayList<>();
     @ManyToOne

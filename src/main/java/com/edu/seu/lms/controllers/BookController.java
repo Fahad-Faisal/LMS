@@ -3,6 +3,7 @@ import com.edu.seu.lms.entity.Book;
 import com.edu.seu.lms.entity.Publication;
 import com.edu.seu.lms.repository.BookRepository;
 import com.edu.seu.lms.repository.PublicationRepository;
+import com.edu.seu.lms.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,10 @@ public class BookController {
     PublicationRepository publicationRepository;
     @Autowired
     private BookRepository bookRepository;
+    private final BookService bookService;
+    BookController(BookService bookService){
+        this.bookService=bookService;
+    }
     @GetMapping
     public String showBooks(Model model) {
         List<Book> books = bookRepository.findAll();
@@ -34,6 +39,8 @@ public class BookController {
     public String saveBook(@ModelAttribute Book book,
                               RedirectAttributes redirectAttributes) {
         try {
+            Publication publication=publicationRepository.findByPublisherName(book.getPublisherName());
+            book.setPublication(publication);
             bookRepository.save(book);
             redirectAttributes.addFlashAttribute("successMessage", "Book added successfully!");
         } catch (Exception e) {
@@ -65,8 +72,12 @@ public class BookController {
     @GetMapping("/delete/{id}")
     public String deleteBook(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         try {
-            bookRepository.deleteById(id);
+            if (bookService.deleteBook(id)){
             redirectAttributes.addFlashAttribute("successMessage", "Book deleted successfully!");
+            }else {
+            redirectAttributes.addFlashAttribute("errorMessage", "Book is assigned to student!");
+
+            }
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Error deleting book: " + e.getMessage());
         }
