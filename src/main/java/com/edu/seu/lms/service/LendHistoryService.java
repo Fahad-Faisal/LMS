@@ -47,6 +47,8 @@ public class LendHistoryService {
         else if (student.getDues()>0){
             return "Payments due";
         }
+        lendHistory.setStudentId(student.getId());
+        lendHistory.setBookId(book.getId());
         lendHistory.setStudents(List.of(student));
         lendHistory.setBooks(List.of(book));
         lendHistory.setBookName(book.getBookName());
@@ -63,18 +65,19 @@ public class LendHistoryService {
         return "ok";
     }
 //    @Transactional
-    public boolean returnBook(LendHistory lendHistory) {
-        LendHistory existingLendHistory = lendHistoryRepository.findById(lendHistory.getId()).orElse(null);
+    public boolean returnBook(Long id) {
+        LendHistory existingLendHistory = lendHistoryRepository.findById(id).orElse(null);
         assert existingLendHistory != null;
-        String bookName=existingLendHistory.getBookName();
-        Book book= (Book) bookRepository.findByBookName(bookName).orElse(null);
+        Book book= (Book) bookRepository.findById(existingLendHistory.getBookId()).orElse(null);
         assert book != null;
         book.setQuantity(book.getQuantity()+1);
         existingLendHistory.setStatus("Returned");
-        Student s= (Student) studentRepository.findByName(lendHistory.getStudentName()).orElse(null);
-        assert s != null;
-        s.setTakenBooks(s.getTakenBooks()-1);
+        Student student= (Student) studentRepository.findById(existingLendHistory.getStudentId()).orElse(null);
+        assert student != null;
+        student.setTakenBooks(student.getTakenBooks()-1);
 
+        bookRepository.save(book);
+        studentRepository.save(student);
         lendHistoryRepository.save(existingLendHistory);
         return true;
     }

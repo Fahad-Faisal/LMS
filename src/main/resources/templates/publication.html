@@ -170,7 +170,7 @@
                         <a class="nav-link active sidebar-link" data-bs-toggle="collapse"
                            href="#vendorAndPublictionMgt"
                            role="button" aria-expanded="false" aria-controls="vendorAndPublictionMgt">
-                            <i class="fa-solid fa-swatchbook"></i> Vendor & Publisher
+                            <i class="fa-solid fa-swatchbook"></i> Vendor & Publication
                             <span class="right-icon float-end"><i class="fa-solid fa-chevron-down  "></i></span>
                         </a>
                         <div class="collapse" id="vendorAndPublictionMgt">
@@ -182,7 +182,7 @@
                                     </li>
                                     <li>
                                         <a class="nav-link active" href="publication"><i
-                                                class="fa-solid fa-plus me-2"></i>Add New Publisher</a>
+                                                class="fa-solid fa-plus me-2"></i>Add New Publication</a>
                                     </li>
                                     <li></li>
                                 </ul>
@@ -227,7 +227,7 @@
                     <thead class="table-dark">
                     <tr style="text-align: center;">
                         <th scope="col">#sNo</th>
-                        <th scope="col">Publisher Name</th>
+                        <th scope="col">Publication Name</th>
                         <th scope="col">Address</th>
                         <th scope="col">Description</th>
                         <th scope="col">Action</th>
@@ -270,7 +270,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="editPublicationModalLabel">
-                    Edit Publisher
+                    Edit Publication
                 </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -280,8 +280,8 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="editPublisherName" class="form-label">Publisher Name</label>
-                                <input th:field="*{publisherName}" type="text" class="form-control" id="editPublisherName" name="publisherName" required />
+                                <label for="editPublicationName" class="form-label">Publication Name</label>
+                                <input th:field="*{publisherName}" type="text" class="form-control" id="editPublicationName" name="publicationName" required />
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -314,7 +314,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="addNewPublicationLabel">
-                    Add Publisher
+                    Add Publication
                 </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -323,8 +323,8 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="publisherName" class="form-label">Publisher Name</label>
-                                <input th:field="*{publisherName}" type="text" class="form-control" id="publisherName" name="publisherName" required />
+                                <label for="publicationName" class="form-label">Publication Name</label>
+                                <input th:field="*{publisherName}" type="text" class="form-control" id="publicationName" name="publicationName" required />
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -356,15 +356,15 @@
         $('.editBtn').on('click', function() {
             // Get data from button attributes
             var id = $(this).data('id');
-            var publisherName = $(this).data('name');
+            var publicationName = $(this).data('name');
             var address = $(this).data('address');
             var description = $(this).data('description');
 
-            console.log('Loading data:', {id, publisherName, address, description});
+            console.log('Loading data:', {id, publicationName, address, description});
 
             // Populate the edit modal form fields
             $('#editId').val(id);
-            $('#editPublisherName').val(publisherName);
+            $('#editPublicationName').val(publicationName);
             $('#editAddress').val(address);
             $('#editDescription').val(description);
         });
@@ -372,7 +372,7 @@
         // Clear form when modal is hidden
         $('#editPublicationModal').on('hidden.bs.modal', function() {
             $('#editId').val('');
-            $('#editPublisherName').val('');
+            $('#editPublicationName').val('');
             $('#editAddress').val('');
             $('#editDescription').val('');
         });

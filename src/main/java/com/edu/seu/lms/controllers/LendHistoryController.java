@@ -63,11 +63,12 @@ public class LendHistoryController {
     }
 
     @GetMapping("/update/{id}")
-    public String updateLendHistory(@ModelAttribute LendHistory lendHistory,
+    public String updateLendHistory(@PathVariable Long id,
                              RedirectAttributes redirectAttributes) {
 
         try {
-            if (service.returnBook(lendHistory)){
+            System.out.println(id);
+            if (service.returnBook(id)){
                 redirectAttributes.addFlashAttribute("successMessage", "Book Returned successfully!");
             } else {
                 redirectAttributes.addFlashAttribute("errorMessage", "LendHistory not found!");

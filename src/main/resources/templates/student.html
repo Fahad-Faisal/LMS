@@ -247,9 +247,9 @@
                         <td th:text="${student.subType}"></td>
 <!--                        <td th:text="${student.status}"></td>-->
                         </td>
-                        <!--                        <td th:text="${book.status}"></td>-->
-                        <td th:class="${student.status == 'Active'} ? ' badge bg-success text-white' : 'badge bg-danger text-white'"
-                            th:text="${student.status}">
+                        <td th:switch="${student.status}">
+                            <span th:case="'Active'" class="badge bg-success" th:text="${student.status}"></span>
+                            <span th:case="'Inactive'" class="badge bg-danger" th:text="${student.status}"></span>
                         </td>
                         <td>
                             <button type="button" class="btn btn-primary editBtn" data-bs-toggle="modal"

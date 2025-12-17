@@ -254,9 +254,9 @@
                         </td>
 <!--                        <td th:text="${book.status}"></td>-->
                         </td>
-                        <!--                        <td th:text="${book.status}"></td>-->
-                        <td th:class="${book.status == 'Available'} ? ' badge bg-success text-white' : 'badge bg-danger text-white'"
-                            th:text="${book.status}">
+                        <td th:switch="${book.status}">
+                            <span th:case="'Available'" class="badge bg-success" th:text="${book.status}"></span>
+                            <span th:case="'Unavailable'" class="badge bg-danger" th:text="${book.status}"></span>
                         </td>
                         <td>
                             <button type="button" class="btn btn-primary editBtn" data-bs-toggle="modal"
